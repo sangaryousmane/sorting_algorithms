@@ -21,11 +21,12 @@ typedef struct listint_s
 
 
 /** Helper functions **/
-void swapper(int *array, int first, int second);
 void print_array(const int *array, size_t size);
 void print_list(const listint_t *list);
+void swapper(int *a, int *b);
 
 
 /** SORTING FUNCTIONS **/
 void bubble_sort(int *array, size_t size);
+void quick_sort(int *array, size_t size);
 #endif /** _SORT_H **/
