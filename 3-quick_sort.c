@@ -1,46 +1,85 @@
 #include "sort.h"
 
 
+
+/**
+ * swap - swaps two elements of an array
+ * @start: first element
+ * @end: second element
+ * @size: the array's size
+ * @nums: the array
+ * Return: nothing
+ */
+void swap(int *nums, size_t size, int start, int end)
+{
+        int temp;
+	if (nums[start] != nums[end])
+	{
+		temp = nums[start];
+		nums[start] = nums[end];
+		nums[end] = temp;
+		print_array(nums, size);
+	}
+}
+
+
 /**
  * partition - implements the lomuto partition
- * @arr: the array to partition
- * @low: the lowest element
- * @high: the highest element
+ * @nums: the array to partition
+ * @start: the start element
+ * @end: the last element
+ * @size: the array's size
  * Return: index of the pivot element
  */
-int partition(int arr[], int low, int high)
+int partition(int *nums, size_t size, int start, int end)
 {
-	int pivot = arr[high];
-	int i = low - 1, j;
+	int pivot = nums[end];
+	int i = start - 1, j;
 
-	for (j = low; j <= high - 1; j++)
+	for (j = start; j <= end; j++)
 	{
-		if (arr[j] < pivot)
+		if (nums[j] < pivot)
 		{
 			i++;
-			swap(&arr[i], &arr[j]);
-			print_array(arr, i);
+			swap(nums, size, i, j);
 		}
 	}
-	swap(&arr[i + 1], &arr[high]);
+	swap(nums, size, i + 1, end);
 	return (i + 1);
 }
 
 
 
 /**
- * quick_sort - implements quick sort using the Lomuto algorithm
- * @array: the array to sort
+ * quick_sort_helper - helps in the implementation of quick sort
+ * @nums: the array to sort
+ * @size: the size of the array
+ * @start: the array start
+ * @end: last index
+ * Return: nothing
+ */
+void quick_sort_helper(int *nums, size_t size, int start, int end)
+{
+	int piv_index;
+
+	if (start < end)
+	{
+		piv_index = partition(nums, size, start, end);
+		quick_sort_helper(nums, size, start, piv_index - 1);
+		quick_sort_helper(nums, size, piv_index + 1, end);
+	}
+}
+
+
+/**
+ quick_sort_helper - implements quick sort using lomuto partition
+ * @nums: the array to sort
  * @size: the size of the array
  * Return: nothing
  */
-void quick_sort(int *array, size_t size)
+void quick_sort(int *nums, size_t size)
 {
-	if (array == NULL || size < 2)
+	if (nums == NULL || size < 2)
 		return;
-	int pivot_index = partition(array, 0, size - 1);
-
-	print_array(array, size);
-	partition(array, pivot_index);
-	partition(array, pivot_index + 1, size - pivot_index - 1);
+	quick_sort_helper(nums, size, 0, size - 1);
 }
