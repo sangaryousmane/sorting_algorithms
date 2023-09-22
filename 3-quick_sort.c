@@ -12,7 +12,8 @@
  */
 void swap(int *nums, size_t size, int start, int end)
 {
-        int temp;
+	int temp;
+
 	if (nums[start] != nums[end])
 	{
 		temp = nums[start];
@@ -72,7 +73,7 @@ void quick_sort_helper(int *nums, size_t size, int start, int end)
 
 
 /**
- quick_sort_helper - implements quick sort using lomuto partition
+ * quick_sort - implements quick sort using lomuto partition
  * @nums: the array to sort
  * @size: the size of the array
  * Return: nothing
