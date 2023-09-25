@@ -26,8 +26,9 @@ void print_list(const listint_t *list);
 void swap(int *nums, size_t size, int start, int end);
 int partition(int *nums, size_t size, int start, int end);
 void quick_sort_helper(int *nums, size_t size, int start, int end);
-void merge_helper(int *subarr, int *buff, size_t front, size_t mid, size_t back);
-void merge(int *subarr, int *buff, size_t front, size_t back);
+void merge_subarr(int *subarr, int *buff, size_t front, size_t mid,
+                size_t back);
+void merge(int *nums, int *buffer, size_t start, size_t end);
 
 
 /** SORTING FUNCTIONS **/

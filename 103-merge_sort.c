@@ -2,14 +2,15 @@
 
 
 /**
- * merge_helper- Sort a subarray of integers.
- * @subarr: A subarray of an array of integers to sort.
- * @buff: A buffer to store the sorted subarray.
- * @front: The front index of the array.
- * @mid: The middle index of the array.
- * @back: The back index of the array.
+ * merge_subarr - Sort a subarray of integers.
+ * @subarr: a subarray
+ * @buff: the buffer to store
+ * @front: the array's start index
+ * @mid: the array's middle index
+ * @back: the array's end index
+ * Return: nothing
  */
-void merge_helper(int *subarr, int *buff, size_t front, size_t mid,
+void merge_subarr(int *subarr, int *buff, size_t front, size_t mid,
 		size_t back)
 {
 	size_t i, j, k = 0;
@@ -33,44 +34,44 @@ void merge_helper(int *subarr, int *buff, size_t front, size_t mid,
 	print_array(subarr + front, back - front);
 }
 
-
 /**
- * merge - merge subarrays
- * @nums: A subarray
- * @buffer: A buffer to store the sorted result.
- * @start: The start index
- * @end: The end index
+ * merge - merge sort the subarrays using divide-and-conquer
+ * @subarr: a subarray
+ * @buff: a buffer to store the sorted result.
+ * @front: the start index
+ * @back: the end index
+ * Return: nothing
  */
-void merge(int *nums, int *buffer, size_t start, size_t end)
+void merge(int *subarr, int *buff, size_t front, size_t back)
 {
-	size_t middle;
+	size_t mid;
 
-	if (start - end > 1)
+	if (back - front > 1)
 	{
-		middle = start + (end - start) / 2;
-		merge(nums, buffer, start, middle);
-		merge(nums, buffer, middle, end);
-		merge_helper(nums, buffer, start, middle, end);
+		mid = front + (back - front) / 2;
+		merge(subarr, buff, front, mid);
+		merge(subarr, buff, mid, back);
+		merge_subarr(subarr, buff, front, mid, back);
 	}
 }
 
-
 /**
- * merge_sort - Sort an array of integers in ascending
- *              order using the merge sort algorithm, top-down approach
+ * merge_sort - Sort an array of integers in ascending order
  * @array: An array of integers.
  * @size: The size of the array.
+ * Return: nothing
  */
 void merge_sort(int *array, size_t size)
 {
-	int *buffer;
+	int *buff;
 
 	if (array == NULL || size < 2)
 		return;
 
-	buffer = malloc(sizeof(int) * size);
-	if (buffer == NULL)
+	buff = malloc(sizeof(int) * size);
+	if (buff == NULL)
 		return;
-	merge(array, buffer, 0, size);
-	free(buffer);
+
+	merge(array, buff, 0, size);
+	free(buff);
 }
