@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 
+
 /**
  * enum kind_e - Enumeration of card suits.
  * @SPADE: Spades suit.
@@ -18,6 +19,7 @@ typedef enum kind_e
 	DIAMOND
 } kind_t;
 
+
 /**
  * struct card_s - Playing card
  *
@@ -30,6 +32,8 @@ typedef struct card_s
 	const char *value;
 	const kind_t kind;
 } card_t;
+
+
 
 /**
  * struct deck_node_s - Deck of card
@@ -46,10 +50,15 @@ typedef struct deck_node_s
 } deck_node_t;
 
 
+/** Provided functions **/
 void sort_deck(deck_node_t **deck);
+
+/** Helper functions **/
 int _strcmp(const char *s1, const char *s2);
 char get_value(deck_node_t *card);
+
+/** Sorting algorithm used **/
 void insertion_sort_deck_kind(deck_node_t **deck);
 void insertion_sort_deck_value(deck_node_t **deck);
-void sort_deck(deck_node_t **deck);
+
 #endif /* DECK_H */
